@@ -82,7 +82,7 @@ export class MusicController {
   private async playFile(file: string, loop: boolean): Promise<void> {
     if (!this.enabled || file.length === 0) return;
     this.stop();
-    const candidates = [`/music/${file}.ogg`, `/music/${file}.mp3`, `/music/${file}.wav`];
+    const candidates = [`./music/${file}.ogg`, `./music/${file}.mp3`, `./music/${file}.wav`];
     for (const url of candidates) {
       const audio = new Audio(url);
       audio.loop = loop;

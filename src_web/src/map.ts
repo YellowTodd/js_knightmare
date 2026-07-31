@@ -1,10 +1,10 @@
 import { GAME_VIEW_HEIGHT, MAP_COLS, MAP_ROWS, SCREEN_ROWS, SCREEN_WIDTH, TILE_SIZE, TILES_COLS, TILES_OFFSET } from "./config";
 import type { GameState } from "./types";
 
-const mapsTilesetUrl = "/tiles/maps.png";
+const mapsTilesetUrl = "./tiles/maps.png";
 
 export async function loadStageMap(stage: number): Promise<Uint16Array> {
-  const response = await fetch(`/maps/stage${stage}.map`);
+  const response = await fetch(`./maps/stage${stage}.map`);
   if (!response.ok) {
     throw new Error(`Failed to load map for stage ${stage}`);
   }

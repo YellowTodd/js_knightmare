@@ -1,17 +1,14 @@
 {
-  "name": "knightmare-ts-port",
+  "name": "knightmare",
   "version": "0.1.0",
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview",
-    "check": "tsc --noEmit"
+    "start": "node tools/serve.mjs",
+    "convert": "node tools/build-js.mjs"
   },
   "devDependencies": {
     "@types/node": "^26.1.2",
-    "typescript": "^5.7.3",
-    "vite": "^6.1.1"
+    "typescript": "^5.7.3"
   }
 }

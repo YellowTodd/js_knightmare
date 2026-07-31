@@ -1,4 +1,7 @@
 {
+  // The game now ships as plain ES modules in web/js - this config exists only
+  // for editor IntelliSense and for `npm run convert`, which re-emits web/js
+  // from the TypeScript kept in src_web/src for reference.
   "compilerOptions": {
     "target": "ES2022",
     "module": "ESNext",
@@ -8,10 +11,10 @@
     "noUncheckedIndexedAccess": true,
     "useDefineForClassFields": true,
     "skipLibCheck": true,
-    // "node" is needed by vite.config.ts (node:fs / node:path / node:url) and
-    // by Vite's own plugin types. The game code under src_web/src stays
-    // browser-only in practice - it uses no Node globals.
-    "types": ["vite/client", "node"]
+    "allowJs": true,
+    "checkJs": false,
+    "noEmit": true,
+    "types": ["node"]
   },
-  "include": ["src_web/src", "vite.config.ts"]
+  "include": ["web/js", "src_web/src", "tools"]
 }
