@@ -14,7 +14,7 @@
  *      any import of them left behind.
  */
 import { execFileSync } from "node:child_process";
-import { readFileSync, readdirSync, rmSync, statSync, writeFileSync } from "node:fs";
+import { existsSync, readFileSync, readdirSync, rmSync, statSync, writeFileSync } from "node:fs";
 import { join, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -34,13 +34,26 @@ function walk(dir) {
 
 rmSync(outDir, { recursive: true, force: true });
 
+// node_modules is not kept in the repo - the game itself needs no packages.
+// Only this converter does, so fail with an actionable message.
+const tscPath = join(projectRoot, "node_modules", "typescript", "bin", "tsc");
+if (!existsSync(tscPath)) {
+  console.error(
+    "TypeScript is not installed.\n" +
+    "This script is only needed to regenerate web/js from src_web/src -\n" +
+    "running the game does not require it.\n\n" +
+    "  npm install\n"
+  );
+  process.exit(1);
+}
+
 console.log("tsc -> web/js");
 // Run tsc's entry script through this same Node binary - on Windows, Node 24
 // refuses to spawnSync a .cmd shim (EINVAL).
 execFileSync(
   process.execPath,
   [
-    join(projectRoot, "node_modules", "typescript", "bin", "tsc"),
+    tscPath,
     "--target", "ES2022",
     "--module", "ESNext",
     "--moduleResolution", "Bundler",

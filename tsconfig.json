@@ -14,7 +14,9 @@
     "allowJs": true,
     "checkJs": false,
     "noEmit": true,
-    "types": ["node"]
+    // node_modules is not installed by default, so no @types packages are
+    // pulled in. An empty list keeps the editor from looking for them.
+    "types": []
   },
   "include": ["web/js", "src_web/src", "tools"]
 }
