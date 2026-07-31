@@ -32,10 +32,8 @@ function walk(dir) {
   return out;
 }
 
-rmSync(outDir, { recursive: true, force: true });
-
-// node_modules is not kept in the repo - the game itself needs no packages.
-// Only this converter does, so fail with an actionable message.
+// Check for the compiler BEFORE touching web/js - bailing out after wiping the
+// output would destroy the game with no way to regenerate it.
 const tscPath = join(projectRoot, "node_modules", "typescript", "bin", "tsc");
 if (!existsSync(tscPath)) {
   console.error(
@@ -46,6 +44,8 @@ if (!existsSync(tscPath)) {
   );
   process.exit(1);
 }
+
+rmSync(outDir, { recursive: true, force: true });
 
 console.log("tsc -> web/js");
 // Run tsc's entry script through this same Node binary - on Windows, Node 24
