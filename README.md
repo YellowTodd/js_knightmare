@@ -35,3 +35,12 @@ tools/build-js.mjs  src_web/src -> web/js 재변환 (`npm run convert`)
 
 게임 코드는 이제 `web/js/` 의 JavaScript가 원본입니다. 수정은 여기서 하면 되고,
 저장 후 브라우저 새로고침만 하면 반영됩니다.
+
+## npm install 이 필요한 유일한 경우
+
+`npm run convert` (원본 TypeScript에서 `web/js` 재생성)를 쓸 때만 TypeScript 컴파일러가
+필요합니다. 게임 실행·디버깅에는 전혀 필요하지 않습니다.
+
+```bash
+npm install && npm run convert
+```
